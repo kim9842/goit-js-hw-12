@@ -86,6 +86,15 @@ async function onLoadMoreBtn() {
     } else {
       createGallery(data.hits);
 
+      const scrollGallery = document.querySelector('.gallery-item');
+      if (scrollGallery) {
+        const cardHeight = scrollGallery.getBoundingClientRect().height;
+        window.scrollBy({
+          top: cardHeight * 2,
+          behavior: 'smooth',
+        });
+      }
+
       if (data.hits.length < 15 || data.totalHits <= currentPage * 15) {
         hideLoadMore();
         iziToast.info({
